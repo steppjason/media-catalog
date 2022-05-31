@@ -13,28 +13,35 @@
 }
 
 ::-webkit-scrollbar-thumb {
-	background: rgb(120, 142, 189);
+	background: rgb(43, 43, 43);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-	background: rgb(57, 68, 90);
+	background: rgb(77, 77, 77);
 }
 
 body {
-	font-family: Verdana, Geneva, Tahoma, sans-serif;
+	font-family: 'Nunito Sans', sans-serif;
 	font-size:14px;
 	background-color:rgb(255, 255, 255);
 	color:rgb(88, 88, 88);
 	overflow-y: scroll;
 }
 
+h1, h2, h3, h4, h5, h6 {
+	font-family: 'Montserrat', sans-serif;
+}
+
 footer {
 	position: fixed;
 	bottom: 0;
 	right: 0;
-	margin: 2rem;
+	left: 0;
+	padding: 1rem;
 	font-weight: 600;
 	color: rgb(93 196 185);
+	background-color:white;
+	text-align: right;
 }
 
 footer img {
@@ -57,7 +64,7 @@ footer img {
 	width: 100%;
 	border: 1px solid rgb(238, 238, 238);
 	font-size: 1.1rem;
-	font-family: Verdana, Geneva, Tahoma, sans-serif, FontAwesome;
+	font-family: 'Nunito Sans', sans-serif, FontAwesome;
 }
 
 .search-bar input::placeholder{
@@ -85,6 +92,7 @@ footer img {
 	font-size: 1.2rem;
 	text-transform: uppercase;
 	padding: 2rem 0;
+	z-index:2;
 }
 
 .sidebar h3{
@@ -108,4 +116,29 @@ footer img {
 
 .sidebar li:hover{
 	background-color: rgb(43, 43, 43);
+}
+
+.movies {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 3rem 1rem;
+	margin: 0 0 10rem 0;
+	justify-content: space-between;
+}
+
+.movie {
+	width: calc(20% - 1rem);
+}
+
+.movie img{
+	width: 100%;
+	box-shadow: 6px 6px 7px 1px #000000a3;
+}
+
+.movie > .title{
+	font-size: 1rem;
+	font-weight: 600;
+	padding: 0.5rem;
+	text-transform: uppercase;
+	font-family: 'Montserrat', sans-serif;
 }
