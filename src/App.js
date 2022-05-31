@@ -24,9 +24,7 @@ function App() {
 		fetch(`https://api.themoviedb.org/3/configuration?api_key=${process.env.REACT_APP_MOVIEDB_API_KEY}`)
 			.then(res => res.json())
 			.then(data => {
-				setConfig(prev => {
-					return data
-				})
+				setConfig(data)
 			})
 	}
 
@@ -39,12 +37,12 @@ function App() {
 		<div className="App">
 			<SearchBar />
 			<SideBar onSelect={selectMenuItem} currentView={currentView}/>
-			<div className="view">
-				{ currentView === "My Movies" && <MovieLibrary  config={config}/>}
-				{ currentView === "My Music" && <MusicLibrary  config={config}/>}
-				{currentView === "Browse Movies" && <Movies config={config}/>}
-				{ currentView === "Browse Music" && <Music  config={config}/>}
-			</div>
+			{config.images && <div className="view">
+				{currentView === "My Movies" && <MovieLibrary config={config} />}
+				{currentView === "My Music" && <MusicLibrary config={config} />}
+				{currentView === "Browse Movies" && <Movies config={config} />}
+				{currentView === "Browse Music" && <Music config={config} />}
+			</div>}
 			<Footer/>
 		</div>
 	)

@@ -126,8 +126,12 @@ footer img {
 	justify-content: space-between;
 }
 
-.movie {
+.movies > div {
 	width: calc(20% - 1rem);
+}
+
+.movie {
+	
 }
 
 .movie img{
