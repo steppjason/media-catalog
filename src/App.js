@@ -66,7 +66,6 @@ function App() {
 
 	return (
 		<div className="App">
-			<button onClick={addData}>Add Data</button>
 			<SearchBar />
 			<SideBar onSelect={selectMenuItem} currentView={currentView}/>
 			{config.images && <div className="view">
