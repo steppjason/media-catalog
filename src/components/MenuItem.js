@@ -3,7 +3,6 @@ import React from "react"
 function MenuItem(props) {
 
 	function handleClick(){
-		console.log("handle click")
 		props.onSelect(props.title)
 	}
 
