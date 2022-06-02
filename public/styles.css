@@ -135,12 +135,19 @@ footer img {
 	display: flex;
 	flex-wrap: wrap;
 	gap: 3rem 1rem;
-	margin: 0 0 10rem 0;
-	justify-content: space-between;
+	margin: 0 0 2rem 0;
+	justify-content: flex-start;
+	min-height:600px;
 }
 
 .movies > div {
 	width: calc(16.6666667% - 1rem);
+	min-height: 250px;
+}
+
+.movie__observer {
+	height: 200px;
+	background-color: black;
 }
 
 .movie {
