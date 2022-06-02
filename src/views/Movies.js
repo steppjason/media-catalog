@@ -110,7 +110,7 @@ function Movies(props) {
 					if (movie.poster_path === null)
 						poster = './movie-poster.png'
 					else
-						poster = `${props.config.images.base_url}w400${movie.poster_path}`
+						poster = `${props.config.images.secure_base_url}w400${movie.poster_path}`
 
 					if (index >= movies.list.length - 1)
 						return <div title={index} ref={lastMovieElement} key={index}><Movie title={movie.title} image={poster} /></div>
