@@ -97,7 +97,7 @@ function Movies(props) {
 	
 	useEffect(() => {
 		getMovieLibrary()
-	}, [])
+	}, [getMovieLibrary])
 
 
 	return (
