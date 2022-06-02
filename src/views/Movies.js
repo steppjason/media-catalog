@@ -1,12 +1,19 @@
 import React, { useState, useEffect, useRef, useCallback } from "react"
-
 import Movie from "../components/Movie"
+
+import { collection, getDocs } from "firebase/firestore"
 
 function Movies(props) {
 
 	const [movies, setMovies] = useState( {page: 1, list: []} )
 	const [query, setQuery] = useState('')
+	const [movieLibrary, setMovieLibrary] = useState({})
 	const apiKEY = `?api_key=${process.env.REACT_APP_MOVIEDB_API_KEY}`
+
+	const getMovieLibrary = useCallback(async () => {
+		const res = await getDocs(collection(props.firebaseDB, "movies"))
+		setMovieLibrary(res.docs)	
+	}, [props.firebaseDB])
 
 
 	const getMovies = useCallback(() => {
@@ -74,13 +81,24 @@ function Movies(props) {
 			}
 		})
 		if(node) observer.current.observe(node)
-	},[getMovies, props.query, query])
+	}, [getMovies, props.query, query])
+	
+	function refreshData() {
+		console.log("refreshing data")
+		getMovieLibrary()
+	}
 	
 
 	useEffect(() => {
 		window.scrollTo(0,0);
 		getMovies()
-	},[props.query]) // eslint-disable-line react-hooks/exhaustive-deps
+	}, [props.query]) // eslint-disable-line react-hooks/exhaustive-deps
+	
+	
+	useEffect(() => {
+		getMovieLibrary()
+	}, [])
+
 
 	return (
 		<div>
@@ -89,19 +107,22 @@ function Movies(props) {
 				
 				{movies.list.map((movie, index) => {
 					
-					let poster = `${props.config.images.secure_base_url}w400${movie.poster_path}`
-					if (movie.poster_path === null)
-						poster = './movie-poster.png'
+					//if (Object.keys(movieLibrary).length !== 0) {
+						
+						let poster = `${props.config.images.secure_base_url}w400${movie.poster_path}`
+						if (movie.poster_path === null)
+							poster = './movie-poster.png'
 
-					if (index >= movies.list.length - 1)
-						return <div title={index} ref={lastMovieElement} key={index}><Movie title={movie.title} image={poster} /></div>
-					else
-						return <div title={index} key={index}><Movie title={movie.title} image={poster} /></div>
-					
+						if (index >= movies.list.length - 1)
+							return <div title={index} ref={lastMovieElement} key={index}><Movie movie={movie} image={poster} movieLibrary={movieLibrary} firebaseDB={props.firebaseDB} refreshData={refreshData} /></div>
+						else
+							return <div title={index} key={index}><Movie movie={movie} image={poster} movieLibrary={movieLibrary}  firebaseDB={props.firebaseDB}  refreshData={refreshData} /></div>
+						
+					//}
+
 				})}
 
 			</div>
-			
 		</div>
 	)
 }

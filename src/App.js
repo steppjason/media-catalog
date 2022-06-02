@@ -9,8 +9,8 @@ import Footer from "./components/Footer"
 import SideBar from "./components/SideBar"
 import SearchBar from "./components/SearchBar"
 
-// import { initializeApp } from "firebase/app"
-// import { getFirestore, collection, addDoc } from "firebase/firestore"
+import { initializeApp } from "firebase/app"
+import { getFirestore } from "firebase/firestore"
 
 function App() {
 
@@ -18,34 +18,20 @@ function App() {
 	const [config, setConfig] = useState({})
 	const [query, setQuery] = useState('')
 
-	// Your web app's Firebase configuration
-	// const firebaseConfig = {
-	// 	apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
-	// 	authDomain: process.env.REACT_APP_FIREBASE_DOMAIN,
-	// 	projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
-	// 	storageBucket: process.env.REACT_APP_FIREBASE_STORAGE,
-	// 	messagingSenderId: process.env.REACT_APP_FIREBASE_SENDER_ID,
-	// 	appId: process.env.REACT_APP_FIREBASE_APP_ID
-	// };
-  
-	// Initialize Firebase
-	// const app = initializeApp(firebaseConfig)
-	// const db = getFirestore(app)
+	const firebaseConfig = {
+		apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+		authDomain: process.env.REACT_APP_FIREBASE_DOMAIN,
+		projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
+		storageBucket: process.env.REACT_APP_FIREBASE_STORAGE,
+		messagingSenderId: process.env.REACT_APP_FIREBASE_SENDER_ID,
+		appId: process.env.REACT_APP_FIREBASE_APP_ID
+	};
 
-	// async function addData() {
-	// 	try {
-	// 		const docRef = await addDoc(collection(db, "users"), {
-	// 			first: "Ada",
-	// 			last: "Lovelace",
-	// 			born: 1815
-	// 		});
-	// 		console.log("Document written with ID: ", docRef.id);
-	// 	} catch (e) {
-	// 		console.error("Error adding document: ", e);
-	// 	}
-	// }
+	// Initialize Firebase
+	const firebaseApp = initializeApp(firebaseConfig)
+	const firebaseDB = getFirestore(firebaseApp)
 	
-	
+
 	function selectMenuItem(value) {
 		setView(prev => {
 			return value
@@ -79,10 +65,10 @@ function App() {
 			<SearchBar handleSearch={getQuery}/>
 			<SideBar onSelect={selectMenuItem} currentView={currentView}/>
 			{config.images && <div className="view">
-				{currentView === "My Movies" && <MovieLibrary config={config} query={query} />}
-				{currentView === "My Music" && <MusicLibrary config={config} query={query} />}
-				{currentView === "Browse Movies" && <Movies config={config} query={query} />}
-				{currentView === "Browse Music" && <Music config={config} query={query} />}
+				{currentView === "My Movies" && <MovieLibrary config={config} query={query} firebaseDB={firebaseDB} firebaseConfig={firebaseConfig} />}
+				{currentView === "My Music" && <MusicLibrary 	config={config} query={query} firebaseDB={firebaseDB} firebaseConfig={firebaseConfig} />}
+				{currentView === "Browse Movies" && <Movies 	config={config} query={query} firebaseDB={firebaseDB} firebaseConfig={firebaseConfig} />}
+				{currentView === "Browse Music" && <Music 		config={config} query={query} firebaseDB={firebaseDB} firebaseConfig={firebaseConfig} />}
 			</div>}
 			<Footer/>
 		</div>
