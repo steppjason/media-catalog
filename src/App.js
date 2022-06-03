@@ -66,9 +66,7 @@ function App() {
 			<SideBar onSelect={selectMenuItem} currentView={currentView}/>
 			{config.images && <div className="view">
 				{currentView === "My Movies" && <MoviesLibrary config={config} query={query} firebaseDB={firebaseDB} firebaseConfig={firebaseConfig} />}
-				{currentView === "My Music" && <MusicLibrary 	config={config} query={query} firebaseDB={firebaseDB} firebaseConfig={firebaseConfig} />}
-				{currentView === "Browse Movies" && <Movies 	config={config} query={query} firebaseDB={firebaseDB} firebaseConfig={firebaseConfig} />}
-				{currentView === "Browse Music" && <Music 		config={config} query={query} firebaseDB={firebaseDB} firebaseConfig={firebaseConfig} />}
+				{currentView === "Browse Movies" && <Movies config={config} query={query} firebaseDB={firebaseDB} firebaseConfig={firebaseConfig} />}
 			</div>}
 			<Footer/>
 		</div>
