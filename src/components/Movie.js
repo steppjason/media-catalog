@@ -18,7 +18,11 @@ function Movie(props) {
 	},[props.movieLibrary, props.movie.id]) 
 
 	function addMovie() {
-		addDoc(collection(props.firebaseDB, "movies"), { id: props.movie.id, title: props.movie.title, poster: props.movie.poster_path })
+		if(!props.movie.hasOwnProperty('release_date') || props.movie.release_date === '' || props.movie.release_date === null)
+			addDoc(collection(props.firebaseDB, "movies"), { id: props.movie.id, title: props.movie.title, poster: props.movie.poster_path, release_date: null })
+			else
+			addDoc(collection(props.firebaseDB, "movies"), { id: props.movie.id, title: props.movie.title, poster: props.movie.poster_path, release_date: props.movie.release_date })
+			
 		props.refreshData()
 	}
 
@@ -37,8 +41,7 @@ function Movie(props) {
 			{inLibrary && <div className="check"><i className="fa-solid fa-circle-check"></i></div>}
 			{(!inLibrary && <div className="poster" title={props.movie.id} onClick={addMovie}><img title={props.movie.title} alt={props.movie.title} src={props.image} /></div>) ||
 											<div className="poster" title={props.movie.id} onClick={deleteMovie}><img title={props.movie.title} alt={props.movie.title} src={props.image} /></div> }
-			<div className="title">{props.movie.title}</div>
-			
+			<div className="title">{props.movie.title} {(props.movie.hasOwnProperty('release_date') && (props.movie.release_date !== '')) && `(${props.movie.release_date.substring(0,4)})`}</div>
 		</div>
 	)
 }

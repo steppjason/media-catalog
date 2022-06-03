@@ -6,6 +6,7 @@ function Movies(props) {
 
 	const [movies, setMovies] = useState( {page: 1, list: []} )
 	const [query, setQuery] = useState('')
+	const [totalResults, setTotalResults] = useState(0)
 	const [movieLibrary, setMovieLibrary] = useState({})
 	const apiKEY = `?api_key=${process.env.REACT_APP_MOVIEDB_API_KEY}`
 
@@ -45,7 +46,9 @@ function Movies(props) {
 				.then(data => {
 		
 					tempMovies = {page: 2, list: data.results}
-
+					
+					setTotalResults(data.total_results)
+					
 					if (props.query !== query)
 						setMovies(tempMovies)
 					else {
@@ -65,6 +68,7 @@ function Movies(props) {
 			console.error(err)
 			return err
 		}
+
 
 	}, [movies.page, props.query, query, apiKEY])
 
@@ -106,13 +110,11 @@ function Movies(props) {
 		<div>
 			<h1>Movies</h1>
 			<div className="movies">
-				
 				{movies.list.map((movie, index) => {
 					let poster = `${props.config.images.secure_base_url}w400${movie.poster_path}`
 					if (movie.poster_path === null)
 						poster = './movie-poster.png'
-
-					if (index >= movies.list.length - 1)
+					if (index >= movies.list.length - 1 && index < totalResults - 1)
 						return <div title={index} ref={lastMovieElement} key={index}><Movie movie={movie} image={poster} movieLibrary={movieLibrary} firebaseDB={props.firebaseDB} refreshData={refreshData} /></div>
 					else
 						return <div title={index} key={index}><Movie movie={movie} image={poster} movieLibrary={movieLibrary}  firebaseDB={props.firebaseDB}  refreshData={refreshData} /></div>
