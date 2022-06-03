@@ -5,8 +5,8 @@ import MenuList from "./MenuList"
 
 function SideBar(props) {
 
-	const libraryMenu = ["My Movies", "My Music"]
-	const mediaMenu = ["Browse Movies", "Browse Music"]
+	const libraryMenu = ["My Movies"]
+	const mediaMenu = ["Browse Movies"]
 
 	function selectItem(value) {
 		props.onSelect(value)
