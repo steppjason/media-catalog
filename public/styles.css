@@ -159,7 +159,11 @@ footer img {
 	cursor: pointer;
 }
 
-.movie .check {
+.movie.library .poster {
+	cursor:default;
+}
+
+.movie .check, .movie .remove {
 	color: green;
 	font-size: 3.5rem;
 	position: absolute;
@@ -168,7 +172,12 @@ footer img {
 	animation: popin 0.2s linear forwards
 }
 
-.movie .check > i {
+.movie .remove {
+	color: red;
+	cursor: pointer;
+}
+
+.movie .check > i, .movie .remove > i {
 	background-color: white;
 	border-radius: 100%;
 	height: 56px
@@ -187,6 +196,10 @@ footer img {
 	padding: 0.5rem;
 	text-transform: uppercase;
 	font-family: 'Montserrat', sans-serif;
+}
+
+.movie.library.spacer {
+	height: 100px;
 }
 
 @keyframes popin {

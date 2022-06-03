@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react"
 
-import MovieLibrary from "./views/MovieLibrary"
+import MoviesLibrary from "./views/MoviesLibrary"
 import MusicLibrary from "./views/MusicLibrary"
 import Movies from "./views/Movies"
 import Music from "./views/Music"
@@ -65,7 +65,7 @@ function App() {
 			<SearchBar handleSearch={getQuery}/>
 			<SideBar onSelect={selectMenuItem} currentView={currentView}/>
 			{config.images && <div className="view">
-				{currentView === "My Movies" && <MovieLibrary config={config} query={query} firebaseDB={firebaseDB} firebaseConfig={firebaseConfig} />}
+				{currentView === "My Movies" && <MoviesLibrary config={config} query={query} firebaseDB={firebaseDB} firebaseConfig={firebaseConfig} />}
 				{currentView === "My Music" && <MusicLibrary 	config={config} query={query} firebaseDB={firebaseDB} firebaseConfig={firebaseConfig} />}
 				{currentView === "Browse Movies" && <Movies 	config={config} query={query} firebaseDB={firebaseDB} firebaseConfig={firebaseConfig} />}
 				{currentView === "Browse Music" && <Music 		config={config} query={query} firebaseDB={firebaseDB} firebaseConfig={firebaseConfig} />}
