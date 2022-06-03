@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useRef, useCallback } from "react"
+import React, { useState, useEffect, useCallback } from "react"
 import MovieLibrary from "../components/MovieLibrary"
-import { collection, onSnapshot, orderBy, query, where } from "firebase/firestore"
+import { collection, onSnapshot, orderBy, query } from "firebase/firestore"
 
 function MoviesLibrary(props) {
 
@@ -51,17 +51,7 @@ function MoviesLibrary(props) {
 		
 		
 
-	}, [props.query])
-
-	const observer = useRef()
-	const lastMovieElement = useCallback(node => {
-		if (observer.crrent) observer.current.disconnect()
-		observer.current = new IntersectionObserver(element => {
-			if (element[0].isIntersecting)
-				console.log("intersecting")
-		})
-	})
-	
+	}, [props.query, apiKEY, qry])
 
 	function refreshData() {
 		getMovieLibrary()
@@ -97,8 +87,10 @@ function MoviesLibrary(props) {
 
 						if (searchMovies.length > 0) {	
 							return searchMovies.map((searchMovie) => {
-								if(searchMovie.id == movie.data().id)
+								if(searchMovie.id === movie.data().id)
 									return <div title={index} key={index}><MovieLibrary movie={movie} image={poster} movieLibrary={movieLibrary} firebaseDB={props.firebaseDB} refreshData={refreshData} /></div>
+								
+								return null
 							})
 						} else {
 							return <div title={index} key={index}><MovieLibrary movie={movie} image={poster} movieLibrary={movieLibrary}  firebaseDB={props.firebaseDB}  refreshData={refreshData} /></div>

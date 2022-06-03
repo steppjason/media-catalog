@@ -14,7 +14,7 @@ import { getFirestore } from "firebase/firestore"
 
 function App() {
 
-	const [currentView, setView] = useState("Browse Movies")
+	const [currentView, setView] = useState("My Movies")
 	const [config, setConfig] = useState({})
 	const [query, setQuery] = useState('')
 

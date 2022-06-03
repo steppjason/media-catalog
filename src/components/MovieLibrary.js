@@ -1,23 +1,7 @@
-
-import React, { useState, useEffect } from "react"
-import { collection, addDoc, doc, deleteDoc } from "firebase/firestore"
+import React from "react"
+import {  doc, deleteDoc } from "firebase/firestore"
 
 function MovieLibrary(props) {
-
-	const [inLibrary, setInLibrary] = React.useState(false)
-
-	useEffect(() => {
-		if (Object.keys(props.movieLibrary).length !== 0) {
-			setInLibrary(false)
-			props.movieLibrary.map(movie => {
-				if (props.movie.id === movie.data().id)
-					setInLibrary(true)
-				
-				return movie
-				})
-		}
-	},[props.movieLibrary, props.movie.id]) 
-
 	async function deleteMovie() {
 		props.movieLibrary.map(movie => {
 			if (props.movie.id === movie.id) {
