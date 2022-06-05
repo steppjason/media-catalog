@@ -1,9 +1,7 @@
 import React, {useState, useEffect} from "react"
 
 import MoviesLibrary from "./views/MoviesLibrary"
-import MusicLibrary from "./views/MusicLibrary"
 import Movies from "./views/Movies"
-import Music from "./views/Music"
 
 import Footer from "./components/Footer"
 import SideBar from "./components/SideBar"

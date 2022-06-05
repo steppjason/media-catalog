@@ -16,7 +16,7 @@ function MovieLibrary(props) {
 		<div className="movie library">
 			<div className="remove" onClick={deleteMovie}><i className="fa-solid fa-circle-xmark"></i></div>
 			<div className="poster" title={props.movie.data().id}><img title={props.movie.data().title} alt={props.movie.data().title} src={props.image} /></div>
-			<div className="title">{props.movie.data().title} ({ props.movie.data().release_date})</div>
+			<div className="title">{props.movie.data().title} {(props.movie.data().hasOwnProperty('release_date') && (props.movie.data().release_date !== '')) && `(${props.movie.data().release_date.substring(0,4)})`}</div>
 		</div>
 	)
 }
